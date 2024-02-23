@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  api_app:
+    container_name: api_bank
+    image: api_bank:1.0
+    build: ./Backend/bank-test
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:mariadb://databasemaria:3306/ProductosBancariosUsuario
+    depends_on:
+      - databasemaria
+  databasemaria:
+    container_name: databasemaria
+    image: mariadb
+    ports:
+      - 3307:3306
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=
+
+

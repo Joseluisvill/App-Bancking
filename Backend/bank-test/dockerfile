@@ -1,0 +1,3 @@
+FROM openjdk:17-jdk-alpine
+copy target/bank-test-1.jar banktest.jar
+ENTRYPOINT ["java","-jar","banktest.jar"]
