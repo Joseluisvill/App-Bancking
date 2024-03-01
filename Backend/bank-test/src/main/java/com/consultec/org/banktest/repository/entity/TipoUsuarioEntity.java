@@ -2,6 +2,8 @@ package com.consultec.org.banktest.repository.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "tipoUsuario")
 public class TipoUsuarioEntity {
@@ -9,11 +11,10 @@ public class TipoUsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private UsuarioEntity usuario;
+    @ManyToMany
+    private Set<UsuarioEntity> usuario;
 
-    public TipoUsuarioEntity(Long id, String nombre, UsuarioEntity usuario) {
+    public TipoUsuarioEntity(Long id, String nombre, Set<UsuarioEntity> usuario) {
         this.id = id;
         this.nombre = nombre;
         this.usuario = usuario;
@@ -35,11 +36,11 @@ public class TipoUsuarioEntity {
         this.nombre = nombre;
     }
 
-    public UsuarioEntity getUsuario() {
+    public Set<UsuarioEntity> getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioEntity usuario) {
+    public void setUsuario(Set<UsuarioEntity> usuario) {
         this.usuario = usuario;
     }
 }

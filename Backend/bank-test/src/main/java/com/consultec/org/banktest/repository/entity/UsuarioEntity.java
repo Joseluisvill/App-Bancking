@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
@@ -22,12 +23,12 @@ public class UsuarioEntity {
     private Date fechaIn;
     private Date fechaOut;
     private Date fechaNacimiento;
+    @ManyToMany(mappedBy = "usuario")
+    private Set<TipoUsuarioEntity> tipoUsuarios;
     @OneToMany(mappedBy = "usuario")
-    private List<TipoUsuarioEntity> listaTipoUsuario;
-    @OneToMany(mappedBy = "usuario")
-    private List<CuentaEntity> listaCuentas;
+    private List<CuentaEntity> cuentas;
 
-    public UsuarioEntity(Long id, String nombre, String apellidos, String dni, String correo, String contrasena, EstatusEntity estatus, Date fechaIn, Date fechaOut, Date fechaNacimiento, List<TipoUsuarioEntity> listaTipoUsuario, List<CuentaEntity> listaCuentas) {
+    public UsuarioEntity(Long id, String nombre, String apellidos, String dni, String correo, String contrasena, EstatusEntity estatus, Date fechaIn, Date fechaOut, Date fechaNacimiento, Set<TipoUsuarioEntity> listaTipoUsuario, List<CuentaEntity> listaCuentas) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -38,8 +39,19 @@ public class UsuarioEntity {
         this.fechaIn = fechaIn;
         this.fechaOut = fechaOut;
         this.fechaNacimiento = fechaNacimiento;
-        this.listaTipoUsuario = listaTipoUsuario;
-        this.listaCuentas = listaCuentas;
+        this.tipoUsuarios = listaTipoUsuario;
+        this.cuentas = listaCuentas;
+    }
+
+    public UsuarioEntity(String nombre, String apellidos, String dni, String correo, String contrasena, EstatusEntity estatus, Date fechaIn, Date fechaNacimiento) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.estatus = estatus;
+        this.fechaIn = fechaIn;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Long getId() {
@@ -122,19 +134,19 @@ public class UsuarioEntity {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public List<TipoUsuarioEntity> getListaTipoUsuario() {
-        return listaTipoUsuario;
+    public Set<TipoUsuarioEntity> getListaTipoUsuario() {
+        return tipoUsuarios;
     }
 
-    public void setListaTipoUsuario(List<TipoUsuarioEntity> listaTipoUsuario) {
-        this.listaTipoUsuario = listaTipoUsuario;
+    public void setListaTipoUsuario(Set<TipoUsuarioEntity> listaTipoUsuario) {
+        this.tipoUsuarios = listaTipoUsuario;
     }
 
     public List<CuentaEntity> getListaCuentas() {
-        return listaCuentas;
+        return cuentas;
     }
 
     public void setListaCuentas(List<CuentaEntity> listaCuentas) {
-        this.listaCuentas = listaCuentas;
+        this.cuentas = listaCuentas;
     }
 }
