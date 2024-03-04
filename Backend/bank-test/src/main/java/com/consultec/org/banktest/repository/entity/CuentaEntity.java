@@ -1,5 +1,7 @@
 package com.consultec.org.banktest.repository.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,37 +12,31 @@ public class CuentaEntity {
     @TableGenerator(name = "idGenerator",initialValue = 10000)
     private Long numeroCuenta;
     private String alias;
-    @OneToOne
+    private Double saldo;
+    @ManyToOne
     @JoinColumn(name = "idEstatus")
     private EstatusEntity estatus;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idTipoCuenta")
     private TipoCuentaEntity tipoCuenta;
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private UsuarioEntity usuario;
-    @OneToOne
-    @JoinColumn(name = "idMovimento")
-    private MovimientoEntity movimiento;
+    @OneToMany(mappedBy = "numeroCuenta")
+    private List <MovimientoEntity> movimiento;
+    @OneToMany(mappedBy = "numeroCuenta")
+    private List <TransferenciaEntity> transferencia;
 
     public CuentaEntity() {
     }
 
-    public CuentaEntity(Long numeroCuenta, String alias, EstatusEntity estatus, TipoCuentaEntity tipoCuenta, UsuarioEntity usuario, MovimientoEntity movimiento) {
+    public CuentaEntity(Long numeroCuenta, String alias, Double saldo, EstatusEntity estatus, TipoCuentaEntity tipoCuenta, UsuarioEntity usuario) {
         this.numeroCuenta = numeroCuenta;
         this.alias = alias;
+        this.saldo = saldo;
         this.estatus = estatus;
         this.tipoCuenta = tipoCuenta;
         this.usuario = usuario;
-        this.movimiento = movimiento;
-    }
-
-    public MovimientoEntity getMovimiento() {
-        return movimiento;
-    }
-
-    public void setMovimiento(MovimientoEntity movimiento) {
-        this.movimiento = movimiento;
     }
 
     public Long getNumeroCuenta() {
@@ -59,7 +55,15 @@ public class CuentaEntity {
         this.alias = alias;
     }
 
-    public EstatusEntity getEstatus() {
+    public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+	public EstatusEntity getEstatus() {
         return estatus;
     }
 

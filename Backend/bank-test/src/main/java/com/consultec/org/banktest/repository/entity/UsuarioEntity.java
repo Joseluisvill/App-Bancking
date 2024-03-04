@@ -10,6 +10,7 @@ import java.util.Set;
 @Table(name = "usuarios")
 public class UsuarioEntity {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
@@ -17,7 +18,7 @@ public class UsuarioEntity {
     private String dni;
     private String correo;
     private String contrasena;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idEstatus")
     private EstatusEntity estatus;
     private Date fechaIn;

@@ -1,5 +1,7 @@
 package com.consultec.org.banktest.repository.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,16 +11,15 @@ public class TipoCuentaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
-    @OneToOne(mappedBy = "tipoCuenta")
-    private CuentaEntity cuenta;
+    @OneToMany(mappedBy = "tipoCuenta")
+    private List<CuentaEntity> cuenta;
 
     public TipoCuentaEntity() {
     }
 
-    public TipoCuentaEntity(Long id, String tipo, CuentaEntity cuenta) {
+    public TipoCuentaEntity(Long id, String tipo) {
         this.id = id;
         this.tipo = tipo;
-        this.cuenta = cuenta;
     }
 
     public Long getId() {
@@ -37,11 +38,4 @@ public class TipoCuentaEntity {
         this.tipo = tipo;
     }
 
-    public CuentaEntity getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(CuentaEntity cuenta) {
-        this.cuenta = cuenta;
-    }
 }

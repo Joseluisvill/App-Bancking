@@ -3,6 +3,8 @@ package com.consultec.org.banktest.repository.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
+
 
 @Entity
 @Table(name = "tipoMovimiento")
@@ -10,11 +12,12 @@ public class TipoMovimientoEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @OneToMany(mappedBy = "tipoMovimiento")
+    private List<MovimientoEntity> movimientos;
     private String nombre;
     private Date fechaCreacion;
     private double cargo;
-    @OneToOne(mappedBy = "")
-    private MovimientoEntity movimiento;
+   
     public TipoMovimientoEntity(Long id, String nombre, Date fechaCreacion, double cargo) {
         this.id = id;
         this.nombre = nombre;
@@ -53,4 +56,13 @@ public class TipoMovimientoEntity {
     public void setCargo(double cargo) {
         this.cargo = cargo;
     }
+
+	public List<MovimientoEntity> getMovimientos() {
+		return movimientos;
+	}
+
+	public void setMovimientos(List<MovimientoEntity> movimientos) {
+		this.movimientos = movimientos;
+	}
+    
 }
