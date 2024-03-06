@@ -1,5 +1,7 @@
 package com.consultec.org.banktest.repository.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,10 +12,10 @@ public class EstatusEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    @OneToOne(mappedBy = "estatus")
-    private UsuarioEntity usuario;
-    @OneToOne(mappedBy = "estatus")
-    private CuentaEntity cuenta;
+    @OneToMany(mappedBy = "estatus")
+    private List<UsuarioEntity> usuario;
+    @OneToMany(mappedBy = "estatus")
+    private List<CuentaEntity> cuenta;
 
     public EstatusEntity(Long id, String nombre) {
         this.id = id;

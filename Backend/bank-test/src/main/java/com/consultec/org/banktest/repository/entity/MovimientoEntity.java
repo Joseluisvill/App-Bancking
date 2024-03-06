@@ -8,24 +8,34 @@ public class MovimientoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "movimiento")
+    @ManyToOne
+    @JoinColumn(name = "numeroCuenta")
     private CuentaEntity numeroCuenta;
-    @OneToOne(mappedBy = "movimiento")
-    private TipoMovimientoEntity tipoMovimiento;
     private double monto;
     @ManyToOne
     @JoinColumn(name = "idTransferencia")
     private TransferenciaEntity transferencia;
+    @ManyToOne
+    @JoinColumn(name = "idTipoMov")
+    private TipoMovimientoEntity tipoMovimiento;
 
-    public MovimientoEntity(Long id, CuentaEntity numeroCuenta, TipoMovimientoEntity tipoMovimiento, double monto, TransferenciaEntity transferencia) {
+    public MovimientoEntity(Long id, CuentaEntity numeroCuenta, double monto, TipoMovimientoEntity tipoMovimiento, TransferenciaEntity transferencia) {
         this.id = id;
         this.numeroCuenta = numeroCuenta;
-        this.tipoMovimiento = tipoMovimiento;
         this.monto = monto;
+        this.tipoMovimiento = tipoMovimiento;
         this.transferencia = transferencia;
     }
 
-    public Long getId() {
+    public TipoMovimientoEntity getTipoMovimiento() {
+		return tipoMovimiento;
+	}
+
+	public void setTipoMovimiento(TipoMovimientoEntity tipoMovimiento) {
+		this.tipoMovimiento = tipoMovimiento;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -41,23 +51,15 @@ public class MovimientoEntity {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public TipoMovimientoEntity getTipoMovimiento() {
-        return tipoMovimiento;
-    }
-
-    public void setTipoMovimiento(TipoMovimientoEntity tipoMovimiento) {
-        this.tipoMovimiento = tipoMovimiento;
-    }
-
     public double getMonto() {
-        return monto;
-    }
+		return monto;
+	}
 
-    public void setMonto(double monto) {
-        this.monto = monto;
-    }
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
 
-    public TransferenciaEntity getTransferencia() {
+	public TransferenciaEntity getTransferencia() {
         return transferencia;
     }
 

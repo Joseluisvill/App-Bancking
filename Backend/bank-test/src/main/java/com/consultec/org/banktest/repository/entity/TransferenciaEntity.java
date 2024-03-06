@@ -29,11 +29,12 @@ public class TransferenciaEntity {
         this.id = id;
     }
 
-    public Date getFechaTransferencia() {
+	public Date getFechaTransferencia() {
         return fechaTransferencia;
     }
 
     public void setFechaTransferencia(Date fechaTransferencia) {
         this.fechaTransferencia = fechaTransferencia;
     }
+
 }
