@@ -24,8 +24,6 @@ public class CuentaEntity {
     private UsuarioEntity usuario;
     @OneToMany(mappedBy = "numeroCuenta")
     private List <MovimientoEntity> movimiento;
-    @OneToMany(mappedBy = "numeroCuenta")
-    private List <TransferenciaEntity> transferencia;
 
     public CuentaEntity() {
     }

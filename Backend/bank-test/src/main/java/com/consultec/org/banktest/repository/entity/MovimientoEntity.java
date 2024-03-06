@@ -11,16 +11,18 @@ public class MovimientoEntity {
     @ManyToOne
     @JoinColumn(name = "numeroCuenta")
     private CuentaEntity numeroCuenta;
-    @OneToOne
+    private double monto;
+    @ManyToOne
     @JoinColumn(name = "idTransferencia")
     private TransferenciaEntity transferencia;
     @ManyToOne
     @JoinColumn(name = "idTipoMov")
     private TipoMovimientoEntity tipoMovimiento;
 
-    public MovimientoEntity(Long id, CuentaEntity numeroCuenta, TipoMovimientoEntity tipoMovimiento, TransferenciaEntity transferencia) {
+    public MovimientoEntity(Long id, CuentaEntity numeroCuenta, double monto, TipoMovimientoEntity tipoMovimiento, TransferenciaEntity transferencia) {
         this.id = id;
         this.numeroCuenta = numeroCuenta;
+        this.monto = monto;
         this.tipoMovimiento = tipoMovimiento;
         this.transferencia = transferencia;
     }
@@ -49,7 +51,15 @@ public class MovimientoEntity {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public TransferenciaEntity getTransferencia() {
+    public double getMonto() {
+		return monto;
+	}
+
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+
+	public TransferenciaEntity getTransferencia() {
         return transferencia;
     }
 
